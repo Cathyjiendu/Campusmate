@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CampusMate | Student Companion</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- MOBILE HEADER -->
+<header class="mobile-header">
+    <button id="menu-btn">☰</button>
+    <div class="mobile-logo">📚 CampusMate</div>
+    <button id="mobile-theme">🌙</button>
+</header>
+
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+
+    <div class="logo">
+        <span>📚</span>
+        <div>
+            <strong>CampusMate</strong>
+            <small>Student Companion</small>
+        </div>
+    </div>
+
+    <nav>
+
+        <a href="#dashboard" class="nav-link active" data-section="dashboard">
+            🏠 <span>Dashboard</span>
+        </a>
+
+        <a href="#courses" class="nav-link" data-section="courses">
+            📖 <span>Courses</span>
+        </a>
+
+        <a href="#assignments" class="nav-link" data-section="assignments">
+            📝 <span>Assignments</span>
+        </a>
+
+        <a href="#timetable" class="nav-link" data-section="timetable">
+            🗓️ <span>Timetable</span>
+        </a>
+
+        <a href="#exams" class="nav-link" data-section="exams">
+            ⏳ <span>Exams</span>
+        </a>
+
+        <a href="#gpa" class="nav-link" data-section="gpa">
+            🎓 <span>GPA Calculator</span>
+        </a>
+
+        <a href="#checklist" class="nav-link" data-section="checklist">
+            ✅ <span>Study Checklist</span>
+        </a>
+
+        <a href="#announcements" class="nav-link" data-section="announcements">
+            🔔 <span>Announcements</span>
+        </a>
+
+        <a href="#profile" class="nav-link" data-section="profile">
+            👤 <span>My Profile</span>
+        </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+        <button id="theme-toggle" class="sidebar-button">
+            🌙 <span>Dark Mode</span>
+        </button>
+
+        <button id="clear-data" class="sidebar-button danger">
+            🗑️ <span>Clear Data</span>
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- MAIN -->
+<main class="main">
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+
+        <div>
+            <p class="small-heading">WELCOME BACK 👋🏽</p>
+            <h1 id="page-title">Dashboard</h1>
+        </div>
+
+        <div class="top-actions">
+
+            <button class="icon-button" id="search-btn">
+                🔍
+            </button>
+
+            <button class="icon-button notification-button" id="notification-btn">
+                🔔
+                <span class="notification-dot"></span>
+            </button>
+
+            <div class="mini-profile" id="profile-shortcut">
+                <div class="avatar">C</div>
+                <div>
+                    <strong id="top-user-name">Student</strong>
+                    <small>Student</small>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SEARCH -->
+    <div class="search-box hidden" id="search-box">
+
+        <input
+            type="text"
+            id="global-search"
+            placeholder="Search CampusMate..."
+        >
+
+        <button id="close-search">✕</button>
+
+        <div id="search-results"></div>
+
+    </div>
+
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="app-section active-section">
+
+        <div class="welcome-card">
+
+            <div>
+                <span class="eyebrow">YOUR CAMPUS, ORGANIZED</span>
+
+                <h2>
+                    Stay organized.<br>
+                    Study smarter. 🎓
+                </h2>
+
+                <p>
+                    Manage your courses, assignments, exams and study goals
+                    from one simple place.
+                </p>
+
+                <button class="primary-btn" data-go="courses">
+                    Explore My Courses →
+                </button>
+            </div>
+
+            <div class="welcome-icon">
+                📚
+            </div>
+
+        </div>
+
+
+        <!-- STATS -->
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-icon">📚</div>
+                <div>
+                    <span>Courses</span>
+                    <strong id="course-count">0</strong>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">📝</div>
+                <div>
+                    <span>Assignments</span>
+                    <strong id="assignment-count">0</strong>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">⏳</div>
+                <div>
+                    <span>Upcoming Exams</span>
+                    <strong id="exam-count">0</strong>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">🎓</div>
+                <div>
+                    <span>Current GPA</span>
+                    <strong id="dashboard-gpa">—</strong>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- DASHBOARD CONTENT -->
+
+        <div class="dashboard-grid">
+
+            <div class="panel">
+
+                <div class="panel-header">
+                    <div>
+                        <span class="eyebrow">UP NEXT</span>
+                        <h3>Upcoming Exams</h3>
+                    </div>
+
+                    <button class="text-btn" data-go="exams">
+                        View all
+                    </button>
+                </div>
+
+                <div id="dashboard-exams" class="empty-state">
+                    No exams added yet.
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="panel-header">
+                    <div>
+                        <span class="eyebrow">TO DO</span>
+                        <h3>Assignments</h3>
+                    </div>
+
+                    <button class="text-btn" data-go="assignments">
+                        View all
+                    </button>
+                </div>
+
+                <div id="dashboard-assignments" class="empty-state">
+                    No assignments yet.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="panel">
+
+            <div class="panel-header">
+                <div>
+                    <span class="eyebrow">TODAY</span>
+                    <h3>Today's Classes</h3>
+                </div>
+
+                <button class="text-btn" data-go="timetable">
+                    Timetable
+                </button>
+            </div>
+
+            <div id="dashboard-schedule" class="schedule-list">
+                No classes added yet.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- COURSES -->
+    <section id="courses" class="app-section">
+
+        <div class="section-heading">
+            <div>
+                <span class="eyebrow">ACADEMICS</span>
+                <h2>My Courses</h2>
+                <p>Keep track of the courses you're taking.</p>
+            </div>
+
+            <button class="primary-btn" id="add-course-btn">
+                + Add Course
+            </button>
+        </div>
+
+        <div id="courses-list" class="cards-grid">
+            <div class="empty-state">
+                No courses added yet.
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ASSIGNMENTS -->
+    <section id="assignments" class="app-section">
+
+        <div class="section-heading">
+            <div>
+                <span class="eyebrow">STAY ON TRACK</span>
+                <h2>Assignments</h2>
+                <p>Never forget an assignment deadline.</p>
+            </div>
+
+            <button class="primary-btn" id="add-assignment-btn">
+                + Add Assignment
+            </button>
+        </div>
+
+        <div id="assignments-list" class="task-list">
+            <div class="empty-state">
+                No assignments added yet.
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- TIMETABLE -->
+    <section id="timetable" class="app-section">
+
+        <div class="section-heading">
+            <div>
+                <span class="eyebrow">YOUR WEEK</span>
+                <h2>Timetable</h2>
+                <p>Keep your weekly classes organized.</p>
+            </div>
+
+            <button class="primary-btn" id="add-class-btn">
+                + Add Class
+            </button>
+        </div>
+
+        <div id="timetable-list" class="timetable-grid">
+            <div class="empty-state">
+                No classes added yet.
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- EXAMS -->
+    <section id="exams" class="app-section">
+
+        <div class="section-heading">
+            <div>
+                <span class="eyebrow">PREPARE EARLY</span>
+                <h2>Exam Countdown</h2>
+                <p>Know exactly how much time you have left.</p>
+            </div>
+
+            <button class="primary-btn" id="add-exam-btn">
+                + Add Exam
+            </button>
+        </div>
+
+        <div id="exams-list" class="exam-grid">
+            <div class="empty-state">
+                No exams added yet.
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- GPA -->
+    <section id="gpa" class="app-section">
+
+        <div class="section-heading">
+            <div>
+                <span class="eyebrow">ACADEMIC PERFORMANCE</span>
+                <h2>GPA Calculator</h2>
+                <p>Calculate your semester GPA.</p>
+            </div>
+        </div>
+
+        <div class="gpa-container">
+
+            <div class="panel">
+
+                <div class="gpa-header">
+                    <div>
+                        <h3>Course Results</h3>
+                        <p>Enter your grade and course unit.</p>
+                    </div>
+
+                    <button class="secondary-btn" id="add-gpa-row">
+                        + Add Course
+                    </button>
+                </div>
+
+                <div id="gpa-rows"></div>
+
+                <button class="primary-btn full-btn" id="calculate-gpa">
+                    Calculate GPA
+                </button>
+
+            </div>
+
+
+            <div class="gpa-result">
+
+                <span>Your GPA</span>
+
+                <strong id="gpa-result">0.00</strong>
+
+                <p id="gpa-message">
+                    Add your courses to calculate your GPA.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CHECKLIST -->
+    <section id="checklist" class="app-section">
+
+        <div class="section-heading">
+            <div>
+                <span class="eyebrow">STUDY SMART</span>
+                <h2>Study Checklist</h2>
+                <p>Break your study goals into small tasks.</p>
+            </div>
+        </div>
+
+        <form id="checklist-form" class="inline-form">
+
+            <input
+                type="text"
+                id="checklist-input"
+                placeholder="e.g. Read Chapter 3"
+                required
+            >
+
+            <button class="primary-btn">
+                Add Task
+            </button>
+
+        </form>
+
+        <div id="checklist-list" class="checklist-list"></div>
+
+    </section>
+
+
+    <!-- ANNOUNCEMENTS -->
+    <section id="announcements" class="app-section">
+
+        <div class="section-heading">
+            <div>
+                <span class="eyebrow">CAMPUS UPDATES</span>
+                <h2>Announcements</h2>
+                <p>Important information in one place.</p>
+            </div>
+
+            <button class="primary-btn" id="add-announcement-btn">
+                + Add Announcement
+            </button>
+        </div>
+
+        <div id="announcements-list" class="announcement-list"></div>
+
+    </section>
+
+
+    <!-- PROFILE -->
+    <section id="profile" class="app-section">
+
+        <div class="section-heading">
+            <div>
+                <span class="eyebrow">ACCOUNT</span>
+                <h2>My Profile</h2>
+                <p>Manage your student information.</p>
+            </div>
+        </div>
+
+        <div class="profile-layout">
+
+            <div class="profile-card">
+
+                <div class="large-avatar" id="profile-avatar">
+                    C
+                </div>
+
+                <h2 id="profile-display-name">
+                    Student
+                </h2>
+
+                <p id="profile-display-school">
+                    Your University
+                </p>
+
+            </div>
+
+
+            <div class="panel">
+
+                <form id="profile-form">
+
+                    <label>
+                        Full Name
+                        <input
+                            type="text"
+                            id="profile-name"
+                            placeholder="Your full name"
+                        >
+                    </label>
+
+                    <label>
+                        University
+                        <input
+                            type="text"
+                            id="profile-school"
+                            placeholder="Your university"
+                        >
+                    </label>
+
+                    <label>
+                        Department
+                        <input
+                            type="text"
+                            id="profile-department"
+                            placeholder="Your department"
+                        >
+                    </label>
+
+                    <label>
+                        Level
+                        <select id="profile-level">
+                            <option value="">Select level</option>
+                            <option>100 Level</option>
+                            <option>200 Level</option>
+                            <option>300 Level</option>
+                            <option>400 Level</option>
+                            <option>500 Level</option>
+                        </select>
+                    </label>
+
+                    <button class="primary-btn">
+                        Save Profile
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- MODAL -->
+<div class="modal-overlay hidden" id="modal">
+
+    <div class="modal">
+
+        <button class="modal-close" id="close-modal">
+            ✕
+        </button>
+
+        <div id="modal-body"></div>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+    Saved successfully!
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
